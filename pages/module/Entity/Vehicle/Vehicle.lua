@@ -494,6 +494,13 @@ function p.getCategories(ctx)
 			cats[#cats + 1] = series .. ' ' .. generation
 		end
 	end
+	-- Variant categorisation and suppression (e.g. "Constellation Mk IV Centaurus")
+	local novariant = ed:value('novariant')
+	if novariant ~= nil then
+		if type(name) == 'string' and name ~= '' then
+			cats[#cats + 1] = name
+		end
+	end
 	-- Career: "Transport career"
 	local career = vehicleUtil.resolveCareer(apiData, args)
 	if career ~= nil then
